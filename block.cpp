@@ -1,17 +1,37 @@
 #include "block.h"
-#include "sha256.h"
-
-block::block(std::string inp, uint32_t index)// creating an element or a block
+#include <iostream>
+void block::intialize(std::string l)
 {
- nonce = 2;
- b_time = std::time(nullptr) // using current time as part of the block
+ b_data = b_data.append(l);
+
+
+}
+void block::display()
+{
+ std::cout << b_data << std::endl;
 }
 
-std::string gethash(std::string h_data)//returns hash of any data in a string format
+std::string block::calculateHash(std::string compute)
 {
-   return sha256(h_data);
+    return sha256(compute);
+
 }
-block::~block()
+
+void block::Mined_Block(uint32_t difficulty)
 {
-    //dtor
+    std::string old_string ;
+    std::string check_string = std::string(difficulty - old_string.length(), '0') + old_string;
+    s = clock();
+    do {
+         nonce++;
+         ss << nonce;
+         mined_hash = block::calculateHash(ss.str());
+    } while (mined_hash.substr(0, difficulty) != check_string);
+
+    e = clock();
+    cpu_time_used = ((double) (e - s)) / CLOCKS_PER_SEC;
+    std::cout << "Time taken to mine a block for a ledger containing " << difficulty << " entries is "  << cpu_time_used << std::endl;
+    std::cout << "Hash of mined block which satisfies criteria to be a block is " << mined_hash << std::endl;
+
+
 }
