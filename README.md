@@ -9,6 +9,7 @@ with this project
 
 ## How to run and output
 The below 2 commands should run the code
+
 g++ block.cpp main.cpp sha256.cpp
 ./a.out
 
